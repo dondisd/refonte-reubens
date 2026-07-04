@@ -30,6 +30,8 @@ h1, h2, dt, .wordmark, .foot-name { font-family: 'Fjalla One', sans-serif; font-
   min-height: 100svh;
   display: flex; flex-direction: column;
   position: relative;
+  isolation: isolate;
+  background: url("assets/hero.webp") center 60% / cover no-repeat; /* fallback si la vidéo ne joue pas */
 }
 .hero-top {
   display: flex; justify-content: space-between; align-items: baseline;
@@ -39,48 +41,41 @@ h1, h2, dt, .wordmark, .foot-name { font-family: 'Fjalla One', sans-serif; font-
 .wordmark { font-size: 1.5rem; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; }
 .header-tel { font-size: 0.9rem; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 
+/* Hero vidéo plein écran (demande Dondi 2026-07-04), texte en bas + CTA */
+.hero-media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.hero-media video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+.hero-veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(23,17,12,0.45) 0%, rgba(23,17,12,0.18) 40%, rgba(23,17,12,0.9) 88%);
+}
+.hero-top { position: relative; z-index: 2; color: var(--creme); }
+.hero-top .est { color: rgba(242, 232, 213, 0.75); }
 .hero-core {
   flex: 1;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center;
-  padding: 18px 22px 12px;
-  position: relative;
-}
-/* L'arche de deli : la photo dans une fenêtre cintrée */
-.arch {
-  width: min(74vw, 320px);
-  aspect-ratio: 3 / 3.6;
-  border-radius: 999px 999px 14px 14px;
-  overflow: hidden;
-  border: 5px solid var(--brun);
-  box-shadow: 10px 10px 0 rgba(179, 56, 43, 0.9);
-  margin-bottom: 18px;
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end;
+  text-align: left;
+  padding: 18px 22px 5svh;
   position: relative; z-index: 1;
+  color: var(--creme);
 }
-.arch img {
-  width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%;
-  animation: kenburns 16s ease-out both;
-}
-@keyframes kenburns { from { transform: scale(1.14); } to { transform: scale(1.0); } }
-
 .hero h1 {
   position: relative; z-index: 2;
-  font-size: clamp(2.4rem, 10.5vw, 6rem);
+  font-size: clamp(2.4rem, 10.5vw, 5.4rem);
   line-height: 0.98; text-transform: uppercase; letter-spacing: 0.005em;
 }
 .hero h1 .line { display: block; }
-.hero h1 .accent { color: var(--pastrami); font-size: 1.18em; }
+.hero h1 .accent { color: var(--pastrami-clair); font-size: 1.18em; }
 
-.hero-cta { margin-top: 22px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.hero-cta { margin-top: 22px; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
 .btn-primary {
   display: inline-block;
   background: var(--pastrami); color: var(--creme);
   font-family: 'Fjalla One', sans-serif; font-size: 1.1rem; letter-spacing: 0.05em; text-transform: uppercase;
   text-decoration: none;
   padding: 16px 36px;
-  border: 3px solid var(--brun);
+  border: 3px solid var(--creme);
   border-radius: 0; /* carré assumé, esprit enseigne — différent des pills précédents */
-  box-shadow: 6px 6px 0 var(--brun);
+  box-shadow: 6px 6px 0 rgba(23, 17, 12, 0.85);
   min-height: 48px;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -192,10 +187,7 @@ h2 { font-size: clamp(1.8rem, 6vw, 2.6rem); line-height: 1.08; text-transform: u
 /* ---------- Desktop ---------- */
 @media (min-width: 720px) {
   .hero-top { padding: 26px 48px 0; }
-  .hero-core { flex-direction: row-reverse; text-align: left; gap: 5vw; padding: 24px 48px; }
-  .arch { width: min(38vw, 460px); margin-bottom: 0; }
-  .hero h1 { text-shadow: none; }
-  .hero-cta { align-items: flex-start; }
+  .hero-core { padding: 24px 48px 7svh; max-width: 900px; }
   .board, .bigquote { padding-left: 48px; padding-right: 48px; }
   .hours-band { grid-template-columns: 1.2fr 1fr; padding: 100px 48px; max-width: 100%; }
   .hours { justify-self: center; }
@@ -203,7 +195,7 @@ h2 { font-size: clamp(1.8rem, 6vw, 2.6rem); line-height: 1.08; text-transform: u
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .arch img { animation: none; }
+  .hero-media video { display: none; } /* le fallback image du .hero prend le relais */
   .stagger { animation: none; opacity: 1; transform: none; }
   [data-reveal] { opacity: 1; transform: none; transition: none; }
   .marquee-track { animation: none; }
