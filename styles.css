@@ -1,0 +1,203 @@
+/* Reuben's Steaks & Deli — refonte concept. Univers deli montréalais, mobile-first, vanilla. */
+:root {
+  --brun: #17110c;
+  --brun-2: #211812;
+  --creme: #f2e8d5;
+  --creme-dim: #c9bda3;
+  --pastrami: #b3382b;
+  --pastrami-clair: #d0523f;
+  --ligne: rgba(242, 232, 213, 0.16);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Merriweather Sans', system-ui, sans-serif;
+  background: var(--brun);
+  color: var(--creme);
+  line-height: 1.6;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3, .wordmark { font-family: 'Fjalla One', sans-serif; font-weight: 400; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: fixed; inset: 0 0 auto 0; z-index: 20;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 22px;
+  background: linear-gradient(rgba(23, 17, 12, 0.8), transparent);
+}
+.wordmark { font-size: 1.3rem; letter-spacing: 0.03em; text-transform: uppercase; text-decoration: none; }
+.wordmark span { color: var(--pastrami-clair); font-size: 0.72em; }
+.header-tel {
+  font-size: 0.92rem; font-weight: 700; text-decoration: none;
+  padding: 10px 16px; border: 1px solid var(--ligne); border-radius: 999px;
+  backdrop-filter: blur(6px); background: rgba(23, 17, 12, 0.35);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 22px 11svh;
+  isolation: isolate;
+}
+.hero-media { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+.hero-media img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%;
+  animation: kenburns 16s ease-out both;
+}
+@keyframes kenburns {
+  from { transform: scale(1.12); }
+  to { transform: scale(1.0); }
+}
+.hero-veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(23,17,12,0.5) 0%, rgba(23,17,12,0.25) 40%, rgba(23,17,12,0.93) 88%);
+}
+.hero-inner { max-width: 640px; }
+.hero-tag {
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--creme); text-shadow: 0 1px 10px rgba(23, 17, 12, 0.8); margin-bottom: 14px;
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 9.4vw, 4.3rem);
+  line-height: 1.02; letter-spacing: 0.005em; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.hero-sub { color: var(--creme-dim); font-size: 1.02rem; max-width: 46ch; margin-bottom: 26px; }
+
+.btn-primary {
+  display: inline-block;
+  background: var(--pastrami); color: var(--creme);
+  font-family: 'Fjalla One', sans-serif; font-size: 1.1rem; letter-spacing: 0.04em; text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 34px; border-radius: 6px;
+  min-height: 48px;
+  box-shadow: 0 6px 24px rgba(179, 56, 43, 0.35);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.btn-primary:hover, .btn-primary:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(179, 56, 43, 0.5);
+  background: var(--pastrami-clair);
+}
+.cta-note { font-size: 0.88rem; color: var(--creme-dim); margin-top: 10px; }
+.cta-note a { color: var(--creme); }
+
+.proof {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 22px; text-decoration: none;
+  font-size: 0.95rem;
+  border-top: 1px dashed var(--ligne); padding-top: 16px;
+}
+.proof .stars { color: var(--pastrami-clair); letter-spacing: 0.12em; font-size: 0.9rem; }
+
+.scroll-hint {
+  position: absolute; left: 50%; bottom: 3.5svh; transform: translateX(-50%);
+  width: 1px; height: 44px;
+  background: linear-gradient(var(--pastrami-clair), transparent);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+
+.stagger { opacity: 0.012; transform: translateY(22px); animation: rise 0.7s ease-out forwards; }
+.s1 { animation-delay: 0.15s; } .s2 { animation-delay: 0.3s; } .s3 { animation-delay: 0.45s; }
+.s4 { animation-delay: 0.6s; } .s5 { animation-delay: 0.78s; }
+@keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+/* ---------- Sections ---------- */
+section { padding: 76px 22px; }
+.section-head { max-width: 640px; margin: 0 auto 40px; text-align: center; }
+.kicker {
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--pastrami-clair); margin-bottom: 10px;
+}
+h2 { font-size: clamp(1.8rem, 6vw, 2.6rem); line-height: 1.1; text-transform: uppercase; letter-spacing: 0.01em; }
+
+/* ---------- The board (ardoise typographique, séparateurs ticket de caisse) ---------- */
+.board { background: var(--brun-2); }
+.board-list {
+  list-style: none; max-width: 700px; margin: 0 auto;
+}
+.board-list li {
+  padding: 26px 4px;
+  border-bottom: 2px dashed var(--ligne);
+  transition: transform 0.2s ease;
+}
+.board-list li:hover { transform: translateX(6px); }
+.board-list h3 {
+  font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em;
+  color: var(--creme); margin-bottom: 6px;
+}
+.board-list p { color: var(--creme-dim); font-size: 0.98rem; max-width: 52ch; }
+.board-cta { text-align: center; margin-top: 40px; }
+
+/* ---------- Reviews ---------- */
+.review-grid { display: grid; gap: 16px; max-width: 980px; margin: 0 auto; }
+.review-grid blockquote { border-left: 3px solid var(--pastrami); padding: 6px 0 6px 18px; }
+.review-grid p { font-size: 1.05rem; line-height: 1.5; }
+.review-grid cite { display: block; margin-top: 10px; font-style: normal; font-size: 0.85rem; color: var(--creme-dim); }
+.reviews-link { text-align: center; margin-top: 34px; font-size: 0.95rem; }
+.reviews-link a { color: var(--pastrami-clair); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Hours ---------- */
+.hours-block { text-align: center; padding: 90px 22px; background: var(--brun-2); position: relative; }
+.hours-block::before {
+  content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 72px; height: 4px; border-radius: 2px;
+  background: repeating-linear-gradient(115deg, var(--pastrami) 0 6px, transparent 6px 12px);
+}
+.hours-sub { color: var(--creme-dim); margin: 10px 0 26px; }
+.hours { margin: 0 auto 30px; border-collapse: collapse; text-align: left; font-size: 0.98rem; }
+.hours td { padding: 8px 18px; border-bottom: 1px dashed var(--ligne); }
+.hours td:last-child { white-space: nowrap; }
+.hours td:first-child { color: var(--creme-dim); }
+.hours strong { color: var(--pastrami-clair); }
+
+/* ---------- Footer ---------- */
+.site-footer { background: #0f0b08; padding: 56px 22px 30px; border-top: 1px solid var(--ligne); }
+.foot-grid { display: grid; gap: 30px; max-width: 980px; margin: 0 auto 40px; }
+.site-footer h3 { font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pastrami-clair); margin-bottom: 8px; }
+.site-footer address { font-style: normal; }
+.site-footer p, .site-footer address { color: var(--creme-dim); font-size: 0.95rem; }
+.site-footer a { color: var(--creme); text-decoration: none; }
+.site-footer a:hover { color: var(--pastrami-clair); }
+.wordmark.small { font-size: 1.05rem; margin-bottom: 10px; }
+.mail-form { display: flex; gap: 8px; margin-top: 8px; }
+.mail-form input {
+  flex: 1; min-width: 0; padding: 10px 12px; font: inherit;
+  background: transparent; border: 1px solid var(--ligne); border-radius: 6px; color: var(--creme);
+}
+.mail-form button {
+  padding: 10px 16px; font-size: 1.1rem; cursor: pointer;
+  background: var(--pastrami); color: var(--creme); border: 0; border-radius: 6px;
+}
+.credit { text-align: center; font-size: 0.8rem; color: rgba(242, 232, 213, 0.45); border-top: 1px solid var(--ligne); padding-top: 22px; max-width: 980px; margin: 0 auto; }
+.credit a { color: rgba(242, 232, 213, 0.7); }
+
+/* ---------- Reveals ---------- */
+[data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity 0.65s ease, transform 0.65s ease; }
+[data-reveal].in { opacity: 1; transform: translateY(0); }
+
+/* ---------- Desktop ---------- */
+@media (min-width: 720px) {
+  .site-header { padding: 22px 48px; }
+  .hero { padding: 0 48px 13svh; }
+  section { padding: 100px 48px; }
+  .review-grid { grid-template-columns: repeat(3, 1fr); }
+  .foot-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-media img { animation: none; }
+  .stagger { animation: none; opacity: 1; transform: none; }
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .scroll-hint { animation: none; }
+  html { scroll-behavior: auto; }
+}
